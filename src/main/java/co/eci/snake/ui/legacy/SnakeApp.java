@@ -48,7 +48,7 @@ public final class SnakeApp extends JFrame {
     this.clock = new GameClock(60, () -> SwingUtilities.invokeLater(gamePanel::repaint));
 
     var exec = Executors.newVirtualThreadPerTaskExecutor();
-    snakes.forEach(s -> exec.submit(new SnakeRunner(s, board)));
+    snakes.forEach(s -> exec.submit(new SnakeRunner(s, board, clock)));
 
     actionButton.addActionListener((ActionEvent e) -> togglePause());
 
@@ -154,6 +154,8 @@ public final class SnakeApp extends JFrame {
       setPreferredSize(new Dimension(board.width() * cell + 1, board.height() * cell + 40));
       setBackground(Color.WHITE);
     }
+
+
 
     @Override
     protected void paintComponent(Graphics g) {
